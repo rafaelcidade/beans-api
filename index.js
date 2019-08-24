@@ -16,6 +16,8 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }).then(
   });
 
 app.get('/get-quiz', cors({options: false}));
+app.post('/check-answer', cors({options: false}));
+app.post('/insert-quiz', cors({options: false}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
