@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3030;
 
-mongoose.connect('mongodb://localhost:27017/beansdb', { useNewUrlParser: true }).then(
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/beansdb';
+
+mongoose.connect(mongoUri, { useNewUrlParser: true }).then(
   (_res, err) => {
       if(!err)
         console.log('Database is connected');
