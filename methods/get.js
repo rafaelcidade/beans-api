@@ -25,9 +25,9 @@ module.exports.getQuiz = getQuiz;
 const getSeller = async (req, res) => {
     const { sellerId } = req.query;
     if(!sellerId) { return res.status(400).json({body: { message: 'Missing sellerId' } }); }
-    const seller = await Sellers.findOne({ sellerId }).lean();
+    const seller = await Sellers.find({ sellerId }).lean();
     if (!seller) { return res.status(400).json({ body: { message: `Seller not found ${sellerId}`}})};
-    seller.timestamp = seller._id.getTimestamp();
+    seller.map(element => { element.timestamp = element._id.getTimestamp() });
     return res.status(200).json({ body: seller });
 };
 module.exports.getSeller = getSeller;
