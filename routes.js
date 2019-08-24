@@ -9,6 +9,7 @@ Router.route('/check-answer').post(async(req, res) => {
     if (!quiz) { return res.status(400).json({ body: { message: `Quiz not found ${req.body.name}`}})};
     const { sequence } = quiz;
     const user = await Users.findOne({ pubkey: req.body.pubkey });
+    if (!user) { return res.status(400).json({ body: { message: `User not found ${req.body.pubkey}`}})};
     const givenAnswer = req.body.sequence.split('');
     const rightAnswer = sequence.split('');
 
@@ -57,6 +58,7 @@ Router.route('/get-quiz').get(async (req, res) => {
   // calling lean() method to insert the answered key to each element
   let quizzes = await Quizzes.find(nameQuery).lean();
   const user = await Users.findOne({ pubkey });
+  if (!user) { return res.status(400).json({ body: { message: `User not found ${pubkey}`}})};
   quizzes.forEach(quiz => {
     quiz.answered = false;
     if (user.quizzes.includes(quiz.name)) 
