@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3030;
@@ -13,6 +14,8 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }).then(
       if(!err)
         console.log('Database is connected');
   });
+
+app.get('/get-quiz', cors({options: false}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
