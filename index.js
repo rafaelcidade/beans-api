@@ -15,9 +15,10 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }).then(
         console.log('Database is connected');
   });
 
-app.get('/get-quiz', cors({ origin: false }));
-app.post('/check-answer', cors({ origin: false }));
-app.post('/insert-quiz', cors({ origin: false }));
+// app.get('/get-quiz', cors({ origin: false }));
+// app.post('/check-answer', cors({ origin: false }));
+// app.post('/insert-quiz', cors({ origin: false }));
+app.use(cors({ origin: false }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
