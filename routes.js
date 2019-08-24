@@ -6,7 +6,7 @@ const { Users } = require('./models/users');
 
 Router.route('/check-answer').post(async(req, res) => {
     const quiz = await Quizzes.findOne({name: req.body.name});
-    return res.status(400).json({ body: { message: `Quiz not found ${req.body.name}`}});
+    if (!quiz) { return res.status(400).json({ body: { message: `Quiz not found ${req.body.name}`}})};
     const { sequence } = quiz;
     const user = await Users.findOne({ pubkey: req.body.pubkey });
     const givenAnswer = req.body.sequence.split('');
