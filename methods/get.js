@@ -27,6 +27,7 @@ const getSeller = async (req, res) => {
     if(!sellerId) { return res.status(400).json({body: { message: 'Missing sellerId' } }); }
     const seller = await Sellers.findOne({ sellerId });
     if (!seller) { return res.status(400).json({ body: { message: `Seller not found ${sellerId}`}})};
+    seller.timestamp = ObjectId(seller._id).getTimestamp();
     return res.status(200).json({ body: seller });
 };
 module.exports.getSeller = getSeller;
